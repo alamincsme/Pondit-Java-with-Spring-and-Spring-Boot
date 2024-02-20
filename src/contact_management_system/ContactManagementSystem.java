@@ -14,7 +14,29 @@ class Contact implements Comparable<Contact> {
         this.email = email;
     }
 
-    // Getters and setters
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     @Override
     public int compareTo(Contact other) {
@@ -58,18 +80,7 @@ class ContactManager {
         contacts.remove(contact);
     }
 
-    public void exportContactsToFile(String fileName) throws IOException {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName))) {
-            oos.writeObject(contacts);
-        }
-    }
 
-    public void importContactsFromFile(String fileName) throws IOException, ClassNotFoundException {
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName))) {
-            TreeSet<Contact> importedContacts = (TreeSet<Contact>) ois.readObject();
-            contacts.addAll(importedContacts);
-        }
-    }
 }
 
 public class ContactManagementSystem {
@@ -97,11 +108,11 @@ public class ContactManagementSystem {
                     contactManager.addContact(newContact);
                     break;
                 case 2:
-                    // View All Contacts
+
                     contactManager.viewAllContacts();
                     break;
                 case 3:
-                    // Search Contact
+
                     System.out.print("Enter Name to search: ");
                     String searchName = scanner.nextLine();
                     Contact foundContact = contactManager.searchContactByName(searchName);
@@ -112,7 +123,7 @@ public class ContactManagementSystem {
                     }
                     break;
                 case 4:
-                    // Update Contact
+
                     System.out.print("Enter Name to update: ");
                     String updateName = scanner.nextLine();
                     Contact existingContact = contactManager.searchContactByName(updateName);
@@ -129,7 +140,7 @@ public class ContactManagementSystem {
                     }
                     break;
                 case 5:
-                    // Delete Contact
+
                     System.out.print("Enter Name to delete: ");
                     String deleteName = scanner.nextLine();
                     Contact contactToDelete = contactManager.searchContactByName(deleteName);
@@ -140,30 +151,9 @@ public class ContactManagementSystem {
                         System.out.println("Contact not found.");
                     }
                     break;
-                case 6:
-                    // Export Contacts
-                    System.out.print("Enter file name for export: ");
-                    String exportFileName = scanner.nextLine();
-                    try {
-                        contactManager.exportContactsToFile(exportFileName);
-                        System.out.println("Contacts exported successfully.");
-                    } catch (IOException e) {
-                        System.out.println("Error exporting contacts: " + e.getMessage());
-                    }
-                    break;
-                case 7:
-                    // Import Contacts
-                    System.out.print("Enter file name for import: ");
-                    String importFileName = scanner.nextLine();
-                    try {
-                        contactManager.importContactsFromFile(importFileName);
-                        System.out.println("Contacts imported successfully.");
-                    } catch (IOException | ClassNotFoundException e) {
-                        System.out.println("Error importing contacts: " + e.getMessage());
-                    }
-                    break;
+
                 case 8:
-                    // Exit
+
                     System.out.println("Exiting Contact Management System. Goodbye!");
                     System.exit(0);
                 default:
