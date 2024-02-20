@@ -25,4 +25,13 @@ public class ContactManager {
         }
         return null;
     }
+
+    public void updateContact(Contact oldContact, Contact updateContact) {
+        contacts.remove(oldContact);
+        contacts.add(updateContact);
+    }
+
+    public void deleteContact(Contact contact) {
+        contacts.remove(contact);
+    }
 }

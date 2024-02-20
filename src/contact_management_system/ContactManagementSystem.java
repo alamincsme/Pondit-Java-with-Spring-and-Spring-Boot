@@ -37,7 +37,41 @@ public class ContactManagementSystem {
                     Contact foundContact = contactManager.searchContactByName(searchName);
                     if (foundContact != null) {
                         System.out.println("Contact found : " + foundContact);
+                    } else {
+                        System.out.println("Contact not found.");
                     }
+                    break;
+                case 4:
+                    System.out.println("Enter name to update: ");
+                    String updateName = scanner.nextLine();
+                    Contact existContact = contactManager.searchContactByName(updateName);
+                    if (existContact != null) {
+                        System.out.println("Enter new Phone Number:");
+                        String newPhoneNo = scanner.nextLine();
+                        System.out.println("Enter new Email: ");
+                        String newEmail = scanner.nextLine();
+                        Contact updatedContact = new Contact(updateName, newPhoneNo, newEmail);
+                        contactManager.updateContact(existContact, updatedContact);
+                    } else {
+                        System.out.println("Contact not found.");
+                    }
+                    break;
+                case 5:
+                    System.out.println("Enter name to delete: ");
+                    Contact deleteContact = contactManager.searchContactByName(scanner.nextLine());
+                    if (deleteContact != null) {
+                            contactManager.deleteContact(deleteContact);
+                        System.out.println("Contact deleted successfully.");
+                    } else {
+                        System.out.println("contact not found.");
+                    }
+                    break;
+                case 6:
+                    System.exit(0);
+
+                default:
+                    System.out.println("Invalid choice!. Please Enter between 1 to 6.");
+
             }
         }
     }
